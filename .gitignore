@@ -1,0 +1,42 @@
+# Node.js
+node_modules/
+
+# Build files
+build/
+dist/
+*.log
+
+# Dependency directories
+lib/
+vendor/
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# Visual Studio Code
+.vscode/
+
+# Log files
+logs/
+
+# Editor-specific files
+.idea/
+*.suo
+*.user
+*.suo
+*.user
+
+# Compiled binary files
+*.dll
+*.exe
+
+# Backup files
+*~
+*.bak
+
+# Package files
+*.zip
+*.tar.gz
