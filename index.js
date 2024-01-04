@@ -255,7 +255,7 @@ async function startServer() {
     console.log('Connected to MongoDB');
 
     // Create an Apollo Server instance
-    const server = new ApolloServer({ typeDefs, resolvers });
+    const server = new ApolloServer({ typeDefs, resolvers, playground: true });
     const app = express();
 
     // Start the Apollo Server
