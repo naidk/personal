@@ -24,7 +24,7 @@ const User = mongoose.model('User', {
 });
 
 const accountSid = 'ACb87f2f264cecfe20600768dab95818dd';
-const authToken = '74c7dd91c38926f43e34381345394af1';
+const authToken = '1ac12519d333d38e12c85bcfebbd24e1';
 const twilioClient = require('twilio')(accountSid, authToken);
 
 const JWT_SECRET = 'AeX$34#90dskRtMdfgPLjmnQ13@';
