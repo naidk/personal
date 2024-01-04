@@ -242,8 +242,11 @@ const resolvers = {
 //   }
 // }
 
+// ... (your existing imports)
+
 async function startServer() {
   try {
+    // Connect to MongoDB
     await mongoose.connect(MONGODB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -251,26 +254,39 @@ async function startServer() {
 
     console.log('Connected to MongoDB');
 
+    // Create an Apollo Server instance
     const server = new ApolloServer({ typeDefs, resolvers });
     const app = express();
 
+    // Start the Apollo Server
     await server.start();
 
+    // Apply Apollo Server middleware to Express
     server.applyMiddleware({ app });
 
+    // Define a catch-all route for any other path
+    app.get('*', (req, res) => {
+      res.send('Apollo Server is running. Use GraphQL endpoint at ' + server.graphqlPath);
+    });
+
+    // Set the port for Heroku deployment or default to 4000
     const PORT = process.env.PORT || 4000;
 
+    // Start the Express server
     app.listen(PORT, () => {
       console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
     });
   } catch (error) {
-    console.error('Error connecting to MongoDB or starting server:', error);
+    console.error('Error:', error.message);
+    process.exit(1); // Exit the process with an error code
   }
 }
 
+// Start the server
 startServer().catch((err) => {
   console.error('Error starting server:', err);
 });
+
 
 // const express = require("express");
 // const app = express();
