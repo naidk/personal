@@ -218,29 +218,53 @@ const resolvers = {
 //   }
 // }
 
+// async function startServer() {
+//   try {
+//     const app = express();
+
+//     const server = new ApolloServer({
+//       typeDefs,
+//       resolvers,
+//     });
+
+//     await mongoose.connect(MONGODB, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log('Connected to MongoDB');
+
+//     await server.start();
+
+//     server.applyMiddleware({ app });
+
+//     const PORT = process.env.PORT || 4000;
+
+//     app.listen(PORT, () => {
+//       console.log(`Server listening on port ${PORT}`);
+//     });
+//   } catch (error) {
+//     console.error('Error connecting to MongoDB or starting server:', error);
+//   }
+// }
+
 async function startServer() {
   try {
-    const app = express();
-
-    const server = new ApolloServer({
-      typeDefs,
-      resolvers,
-    });
-
     await mongoose.connect(MONGODB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+
     console.log('Connected to MongoDB');
 
-    await server.start();
+    const server = new ApolloServer({ typeDefs, resolvers });
+    const app = express();
 
-    server.applyMiddleware({ app });
+    const { url } = await startStandaloneServer(server);
 
     const PORT = process.env.PORT || 4000;
 
     app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
+      console.log(`Server ready at ${url}`);
     });
   } catch (error) {
     console.error('Error connecting to MongoDB or starting server:', error);
