@@ -85,7 +85,7 @@ const resolvers = {
   Mutation: {
     initiatePhoneAuthentication: async (_, { phoneNumber }) => {
       const user = await User.findOne({ phoneNumber });
-      const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
+      const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
       if (!user) {
         await User.create({ phoneNumber, verificationCode, verificationCodeTimestamp: new Date() });
@@ -137,7 +137,7 @@ const resolvers = {
         const timeLimitInMinutes = 5;
         const expirationTime = new Date(currentTime.getTime() + timeLimitInMinutes * 60000);
 
-        const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
+        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
         user.emailVerificationCode = verificationCode;
         user.emailVerificationCodeExpiration = expirationTime;
         await user.save();
