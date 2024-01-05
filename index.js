@@ -152,8 +152,6 @@ const resolvers = {
         await transporter.sendMail(mailOptions);
         console.log(`Email verification code sent to ${email}`);
         console.log(`Code expires at: ${expirationTime}`);
-
-        return 'Email verification code sent successfully';
       } catch (error) {
         console.error('Error initiating email authentication:', error);
         throw new Error('Failed to initiate email authentication');
