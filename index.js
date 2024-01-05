@@ -150,6 +150,8 @@ const resolvers = {
         };
 
         await transporter.sendMail(mailOptions);
+         // Return the verification code
+     return verificationCode;
         console.log(`Email verification code sent to ${email}`);
         console.log(`Code expires at: ${expirationTime}`);
       } catch (error) {
